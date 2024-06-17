@@ -1,10 +1,23 @@
 import Link from "next/link";
 
 import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
 
 import { Title } from "../Title/Title";
 import { useFetchItemsData } from "./ItemsCard.hooks";
+
+/* 商品名のスタイル */
+// 商品名の表示が折り返しで3行を超えた場合は3点リーダー（…）で省略して表示する
+const itemNameStyle = {
+  display: "-webkit-box",
+  WebkitBoxOrient: "vertical",
+  WebkitLineClamp: 3,
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  height: 60,
+};
 
 export const ItemsCard = async () => {
   const { fetchItemsData } = useFetchItemsData();
@@ -25,6 +38,15 @@ export const ItemsCard = async () => {
               style={{ objectFit: "contain" }}
             />
           </Link>
+          <CardContent>
+            <Typography
+              variant="body2"
+              title={data.itemName}
+              sx={itemNameStyle}
+            >
+              {data.itemName}
+            </Typography>
+          </CardContent>
         </Card>
       ))}
     </>
