@@ -19,6 +19,18 @@ const itemNameStyle = {
   height: 60,
 };
 
+/**
+ * 商品価格を「¥#,###」のフォーマットに変換する
+ * @param price {number} - 商品価格
+ * @requires {string} フォーマット変換後の商品価格
+ */
+function formatCurrency(price: number): string {
+  return new Intl.NumberFormat("ja-JP", {
+    style: "currency",
+    currency: "JPY",
+  }).format(price);
+}
+
 export const ItemsCard = async () => {
   const { fetchItemsData } = useFetchItemsData();
   const itemsData = await fetchItemsData();
@@ -45,6 +57,9 @@ export const ItemsCard = async () => {
               sx={itemNameStyle}
             >
               {data.itemName}
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              {formatCurrency(data.itemPrice)}
             </Typography>
           </CardContent>
         </Card>
