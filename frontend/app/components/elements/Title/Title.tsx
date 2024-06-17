@@ -1,5 +1,3 @@
-"use client";
-
 import { Divider, IconButton, Tooltip, Typography } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 
