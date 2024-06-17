@@ -32,7 +32,7 @@ const CenterBox = styled(Box)({
 export const Header = () => {
   return (
     <>
-      <AppBar component="nav">
+      <AppBar component="nav" position="sticky">
         <Toolbar>
           <CenterBox>
             <NotifyIcon />
