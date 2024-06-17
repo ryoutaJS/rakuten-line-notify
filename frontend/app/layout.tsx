@@ -13,8 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>{children}</body>
+    <html lang="en">
+      <body style={{ background: "#f5f5f5" }} className={inter.className}>
+        {children}
+      </body>
     </html>
   );
 }
