@@ -49,6 +49,16 @@ Resources:
       DockerContext: ./
       DockerTag: python3.12-v1
 
+  # cloud watchのロググループの設定
+  ItemActionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ItemActionFunction}
+      RetentionInDays: !Ref LogRetentionInDays
+      Tags:
+        - Key: RakutenPriceNotifyDeveloper
+          Value: Green
+
 Outputs:
   FetchItemApi:
     Description: "API Gateway endpoint URL for Prod stage for ItemAction function"
