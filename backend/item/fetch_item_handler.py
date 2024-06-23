@@ -13,4 +13,7 @@ def fetch_item_handler() -> dict:
     response   = table.scan()
     db_results = response['Items']
 
+    # createdAtの昇順でソート
+    db_results = sorted(db_results, key=lambda data: data["createdAt"])
+
     return { "items": db_results }
