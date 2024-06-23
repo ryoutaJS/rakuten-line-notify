@@ -1,10 +1,18 @@
 import json
 import logging
 
+from fetch_item_handler import fetch_item_handler
+
 
 def handler(event, context):
+    handler_mapping = {
+        "/api/fetch_item": fetch_item_handler,
+    }
     try:
-        result = {"message": "hello world"}
+        path = event["path"]
+        handler = handler_mapping[path]
+
+        result = handler()
         status_code = 200
 
     except Exception as e:
