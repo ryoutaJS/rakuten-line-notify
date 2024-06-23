@@ -14,6 +14,9 @@ Parameters:
   StageName:
     Type: "String"
     Default: "v1"
+  ItemsTableName:
+    Type: String
+    Default: "Items"
   LogRetentionInDays:
     Type: Number
     Default: 1
@@ -35,6 +38,8 @@ Resources:
   ItemActionFunction:
     Type: AWS::Serverless::Function
     Properties:
+      Policies:
+        - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
       PackageType: Image
       Events:
         ItemActionFetch:
@@ -44,6 +49,9 @@ Resources:
             # このパスのイベントを受け取ったときにItemActionラムダを実行
             Path: /api/fetch_item
             Method: get
+      Environment:
+        Variables:
+          DYNAMO_ENDPOINT_URL: "http://dynamodb.ap-northeast-1.amazonaws.com"
     Metadata:
       Dockerfile: ./item/Dockerfile
       DockerContext: ./
@@ -58,6 +66,25 @@ Resources:
       Tags:
         - Key: RakutenPriceNotifyDeveloper
           Value: Green
+
+  # dynamoDBの設定
+  Items:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref ItemsTableName
+      AttributeDefinitions:
+        - AttributeName: genreId
+          AttributeType: S
+        - AttributeName: createdAt
+          AttributeType: S
+      KeySchema:
+        - AttributeName: genreId
+          KeyType: HASH
+        - AttributeName: createdAt
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
 
 Outputs:
   FetchItemApi:
