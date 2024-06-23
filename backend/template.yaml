@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  python3.12
+
+  Sample SAM Template for backend
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 128
+
+Parameters:
+  StageName:
+    Type: "String"
+    Default: "v1"
+  LogRetentionInDays:
+    Type: Number
+    Default: 1
+
+Resources:
+  MyApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref StageName
+      MethodSettings:
+        - DataTraceEnabled: false
+          ResourcePath: "/*"
+          HttpMethod: "*"
+      Cors:
+        AllowOrigin: "'*'"
+        AllowCredentials: false
+        AllowMethods: "'OPTIONS,POST,GET'"
+        AllowHeaders: "'Content-Type,X-CSRF-TOKEN,Access-Control-Allow-Origin'"
+  ItemActionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Events:
+        ItemActionFetch:
+          Type: Api # api gateway経由でイベントを受け取る
+          Properties:
+            RestApiId: !Ref MyApi # 上記で作成したapi gatewayを参照
+            # このパスのイベントを受け取ったときにItemActionラムダを実行
+            Path: /api/fetch_item
+            Method: get
+    Metadata:
+      Dockerfile: ./item/Dockerfile
+      DockerContext: ./
+      DockerTag: python3.12-v1
+
+Outputs:
+  FetchItemApi:
+    Description: "API Gateway endpoint URL for Prod stage for ItemAction function"
+    Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/${StageName}/api/fetch_item/"
+  ItemActionFunction:
+    Description: "Item Action Function Lambda Function ARN"
+    Value: !GetAtt ItemActionFunction.Arn
+  ItemActionFunctionIamRole:
+    Description: "Implicit IAM Role created for Item Action Function function"
+    Value: !GetAtt ItemActionFunctionRole.Arn
