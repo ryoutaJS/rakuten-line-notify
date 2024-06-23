@@ -8,7 +8,7 @@ import { itemsData, itemData } from "@/app/type/types"
 export const useFetchItemsData = () => {
   const fetchItemsData = async (): Promise<itemData[]> => {
     const itemsData: itemsData = await apiClient(
-      "/api/fetch_items",
+      "/api/fetch_item",
       "GET",
       "no-store",
     );
