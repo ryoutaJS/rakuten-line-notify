@@ -73,12 +73,12 @@ Resources:
     Properties:
       TableName: !Ref ItemsTableName
       AttributeDefinitions:
-        - AttributeName: genreId
+        - AttributeName: itemCode
           AttributeType: S
         - AttributeName: createdAt
           AttributeType: S
       KeySchema:
-        - AttributeName: genreId
+        - AttributeName: itemCode
           KeyType: HASH
         - AttributeName: createdAt
           KeyType: RANGE

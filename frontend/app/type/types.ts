@@ -3,7 +3,7 @@ export type itemsData = { items: itemData[] }
 
 // 楽天の商品データの型情報
 export type itemData = {
-  genreId: string,
+  itemCode: string,
   itemName: string,
   itemPrice: number,
   itemUrl: string,

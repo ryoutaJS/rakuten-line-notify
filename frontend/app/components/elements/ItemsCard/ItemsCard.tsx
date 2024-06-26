@@ -45,8 +45,8 @@ export const ItemsCard = async () => {
         </div>
         <Grid container rowSpacing={2} columnSpacing={2}>
           {itemsData.map((data) => (
-            <Grid key={data.genreId} item xs={12} sm={6} md={3} lg={2}>
-              <Card key={data.genreId}>
+            <Grid key={data.itemCode} item xs={12} sm={6} md={3} lg={2}>
+              <Card key={data.itemCode}>
                 <Link href={data.itemUrl} target="_blank">
                   <CardMedia
                     component="img"
