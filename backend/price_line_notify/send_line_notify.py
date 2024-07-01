@@ -1,3 +1,4 @@
+import logging
 import requests
 from get_api_key import get_api_key
 
@@ -14,9 +15,12 @@ def send_line_notify(discount: int, item_url: str) -> None:
 
     headers = {"Authorization": f"Bearer {line_notify_token}"}
     data = {"message": f"以下の商品が{discount}円お買い得になりました！{item_url}"}
-
-    requests.post(
-        url=line_notify_api,
-        headers=headers,
-        data=data,
-    )
+    try:
+        requests.post(
+            url=line_notify_api,
+            headers=headers,
+            data=data,
+        )
+    except Exception as e:
+        logging.error(e)
+        print("LINE通知処理でエラーが発生しました。")
