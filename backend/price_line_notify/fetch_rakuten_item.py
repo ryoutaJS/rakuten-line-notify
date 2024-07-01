@@ -9,13 +9,13 @@ def fetch_rakuten_item(item_code: str) -> dict:
     return: dict   - 商品情報データ
     """
 
-    url = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601"
+    RAKUTEN_API_URL = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601"
     params = {
         "applicationId": get_api_key("RAKUTEN_API_KEY"),
         "itemCode": item_code,
     }
     
-    response: dict = requests.get(url, params=params)
+    response: dict = requests.get(RAKUTEN_API_URL, params=params)
     
     if response.status_code == 200:
         data = response.json()
