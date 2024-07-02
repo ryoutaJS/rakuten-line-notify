@@ -57,6 +57,26 @@ Resources:
       DockerContext: ./
       DockerTag: python3.12-v1
 
+  # 商品価格のLINE通知Lambda（EventBridgeで毎日お昼の12時に実行するように設定）
+  PriceLineNotifyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Policies:
+        - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+      PackageType: Image
+      Events:
+        ScheduledFunction:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 3 * * ? *)
+            Enabled: true
+            Name: LineNotifySchedule
+            Description: price line notify schedule.
+    Metadata:
+      Dockerfile: ./price_line_notify/Dockerfile
+      DockerContext: ./
+      DockerTag: python3.12-v1
+
   # cloud watchのロググループの設定
   ItemActionLogGroup:
     Type: AWS::Logs::LogGroup
