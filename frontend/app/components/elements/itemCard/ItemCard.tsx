@@ -52,7 +52,7 @@ export const ItemCard = ({ data }: { data: itemData }) => {
             >
               {data.itemName}
             </Typography>
-            <Typography variant="body1" color="text.secondary">
+            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
               {formatPrice(data.itemPrice)}
             </Typography>
           </CardContent>
