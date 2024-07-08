@@ -1,5 +1,5 @@
 import { Header } from "./components/elements/Header/Header";
-import { ItemsCard } from "./components/elements/ItemsCard/ItemsCard";
+import { ItemsCard } from "./components/container/ItemsCard/ItemsCard";
 
 export default function Home() {
   return (

@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
-import { Title } from "../Title/Title";
+import { Title } from "../../elements/Title/Title";
 import { ItemCard } from "../ItemCard/ItemCard";
 import { useFetchItemsData } from "./ItemsCard.hooks";
 import { itemData } from "@/app/type/types";
