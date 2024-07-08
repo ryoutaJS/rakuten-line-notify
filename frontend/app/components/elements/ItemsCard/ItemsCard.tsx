@@ -13,9 +13,7 @@ export const ItemsCard = async () => {
   return (
     <>
       <Container maxWidth="xl">
-        <div style={{ marginTop: "2%", marginBottom: "1%" }}>
-          <Title />
-        </div>
+        <Title />
         <Grid container rowSpacing={2} columnSpacing={2}>
           {itemsData.map((data) => (
             <ItemCard key={data.itemCode} data={data} />
