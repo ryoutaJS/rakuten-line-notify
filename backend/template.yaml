@@ -49,6 +49,12 @@ Resources:
             # このパスのイベントを受け取ったときにItemActionラムダを実行
             Path: /api/fetch_item
             Method: get
+        ItemActionDelete:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyApi
+            Path: /api/delete_item
+            Method: post
       Environment:
         Variables:
           DYNAMO_ENDPOINT_URL: "http://dynamodb.ap-northeast-1.amazonaws.com"
@@ -106,6 +112,9 @@ Outputs:
   FetchItemApi:
     Description: "API Gateway endpoint URL for Prod stage for ItemAction function"
     Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/${StageName}/api/fetch_item/"
+  DeleteItemApi:
+    Description: "API Gateway endpoint URL for Prod stage for ItemAction function"
+    Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/${StageName}/api/delete_item/"
   ItemActionFunction:
     Description: "Item Action Function Lambda Function ARN"
     Value: !GetAtt ItemActionFunction.Arn
