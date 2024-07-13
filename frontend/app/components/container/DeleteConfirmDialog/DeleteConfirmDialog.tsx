@@ -1,3 +1,4 @@
+import { useDeleteItem } from "./DeleteConfirmDialog.hooks";
 import { itemData } from "@/app/type/types";
 
 import Box from "@mui/material/Box";
@@ -27,6 +28,8 @@ interface Props {
 }
 
 export const DeleteConfirmDialog = (props: Props) => {
+  const { deleteItem } = useDeleteItem(props.data.itemCode);
+
   return (
     <>
       <Dialog open={props.open} onClose={props.handleClose}>
@@ -48,7 +51,9 @@ export const DeleteConfirmDialog = (props: Props) => {
           <Button variant="outlined" onClick={props.handleClose}>
             キャンセル
           </Button>
-          <Button variant="contained">OK</Button>
+          <Button variant="contained" onClick={deleteItem}>
+            OK
+          </Button>
         </DialogActions>
       </Dialog>
     </>
