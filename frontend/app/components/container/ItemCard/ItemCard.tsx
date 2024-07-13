@@ -4,7 +4,9 @@ import { itemData } from "@/app/type/types";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 
 /* 商品名のスタイル */
@@ -17,6 +19,29 @@ const itemNameStyle = {
   textOverflow: "ellipsis",
   height: 60,
   marginBottom: "2%",
+};
+
+/**
+ * 商品カードのスタイル
+ * @description マウスオーバーして0.4秒後に削除アイコンを表示
+ */
+const cardStyle = {
+  position: "relative",
+  "&:hover .delete-icon": {
+    opacity: 1,
+    transition: "opacity 0.4s ease-in-out",
+  },
+};
+
+/**
+ * 削除アイコンのスタイル
+ * @description 商品カードの右下に表示
+ */
+const deleteButtonStyle = {
+  position: "absolute",
+  bottom: 0,
+  right: 0,
+  opacity: 0,
 };
 
 /**
@@ -35,7 +60,7 @@ export const ItemCard = ({ data }: { data: itemData }) => {
   return (
     <>
       <Grid item xs={12} sm={6} md={3} lg={2}>
-        <Card>
+        <Card sx={cardStyle}>
           <Link href={data.itemUrl} target="_blank">
             <CardMedia
               component="img"
@@ -56,6 +81,9 @@ export const ItemCard = ({ data }: { data: itemData }) => {
               {formatPrice(data.itemPrice)}
             </Typography>
           </CardContent>
+          <IconButton className="delete-icon" sx={deleteButtonStyle}>
+            <DeleteIcon />
+          </IconButton>
         </Card>
       </Grid>
     </>
