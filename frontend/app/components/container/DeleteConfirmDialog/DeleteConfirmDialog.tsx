@@ -8,6 +8,18 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
+/**
+ * 商品名のスタイル
+ * @description 商品名の表示が折り返しで5行を超えた場合は3点リーダー「…」で省略して表示
+ */
+const itemNameStyle = {
+  display: "-webkit-box",
+  WebkitBoxOrient: "vertical",
+  WebkitLineClamp: 5,
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+};
+
 interface Props {
   open: boolean;
   handleClose: () => void;
@@ -28,7 +40,9 @@ export const DeleteConfirmDialog = (props: Props) => {
             alt={props.data.itemName}
             src={props.data.imageUrl}
           />
-          <DialogContentText>{props.data.itemName}</DialogContentText>
+          <DialogContentText sx={itemNameStyle}>
+            {props.data.itemName}
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={props.handleClose}>
