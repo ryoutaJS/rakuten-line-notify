@@ -1,5 +1,8 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
 import { itemData } from "@/app/type/types";
+import { DeleteConfirmDialog } from "../DeleteConfirmDialog/DeleteConfirmDialog";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -57,6 +60,12 @@ const formatPrice = (price: number): string => {
 };
 
 export const ItemCard = ({ data }: { data: itemData }) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
+
   return (
     <>
       <Grid item xs={12} sm={6} md={3} lg={2}>
@@ -81,11 +90,20 @@ export const ItemCard = ({ data }: { data: itemData }) => {
               {formatPrice(data.itemPrice)}
             </Typography>
           </CardContent>
-          <IconButton className="delete-icon" sx={deleteButtonStyle}>
+          <IconButton
+            className="delete-icon"
+            sx={deleteButtonStyle}
+            onClick={() => setDialogOpen(true)}
+          >
             <DeleteIcon />
           </IconButton>
         </Card>
       </Grid>
+      <DeleteConfirmDialog
+        open={dialogOpen}
+        handleClose={handleClose}
+        data={data}
+      />
     </>
   );
 };
