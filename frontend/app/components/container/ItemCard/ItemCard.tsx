@@ -74,7 +74,7 @@ export const ItemCard = ({ data }: { data: itemData }) => {
             <CardMedia
               component="img"
               height="250"
-              image={data.imageUrl}
+              image={data.mediumImageUrls[0].imageUrl}
               style={{ objectFit: "contain" }}
             />
           </Link>

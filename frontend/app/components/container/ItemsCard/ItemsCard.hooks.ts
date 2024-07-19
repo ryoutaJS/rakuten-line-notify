@@ -1,9 +1,9 @@
 import { apiClient } from "@/app/utils/baseApi";
-import { itemsData, itemData } from "@/app/type/types"
+import { itemsData, itemData } from "@/app/type/types";
 
 /**
  * 楽天の商品データを取得するapiを呼び出す
- * @description ローカル環境のモックapiから楽天の商品データを取得して返す
+ * @description DynamoDBから商品データを取得
  */
 export const useFetchItemsData = () => {
   const fetchItemsData = async (): Promise<itemData[]> => {
