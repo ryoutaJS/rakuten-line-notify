@@ -2,7 +2,9 @@
 import { itemData } from "@/app/type/types";
 import { FormEvent, useState } from "react";
 import { useFetchItemsData } from "./AddModal.hooks";
+import { SearchResults } from "../SearchResults/SearchResults";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 
@@ -14,6 +16,8 @@ const boxStyle = {
   bgcolor: "#f5f5f5",
   boxShadow: 24,
   p: 3,
+  overflowY: "auto",
+  height: "80vh",
   width: { xs: "90%", sm: "80%", xl: "60%" },
 };
 
@@ -24,13 +28,14 @@ interface Props {
 
 export const AddModal = (props: Props) => {
   const [searchText, setSearchText] = useState("");
+  const [itemsData, setItemsData] = useState<itemData[]>([]);
   const { fetchItemsData } = useFetchItemsData();
 
   const onSearch = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const result: itemData[] = await fetchItemsData(searchText);
 
-    console.log(result);
+    setItemsData(result);
   };
 
   return (
@@ -45,6 +50,11 @@ export const AddModal = (props: Props) => {
               onChange={(e) => setSearchText(e.target.value)}
             />
           </form>
+          <Grid container spacing={2}>
+            {itemsData.map((data, index) => (
+              <SearchResults key={index} data={data} />
+            ))}
+          </Grid>
         </Box>
       </Modal>
     </>
