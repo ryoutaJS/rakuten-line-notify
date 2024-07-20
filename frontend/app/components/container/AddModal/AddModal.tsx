@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 const boxStyle = {
   position: "absolute",
@@ -42,6 +43,9 @@ export const AddModal = (props: Props) => {
     <>
       <Modal open={props.open} onClose={props.handleClose}>
         <Box sx={boxStyle}>
+          <Typography variant="h5" fontWeight={550}>
+            ほしいものリストに追加
+          </Typography>
           <form onSubmit={onSearch}>
             <TextField
               placeholder="ほしいものリストに追加する商品を検索"
