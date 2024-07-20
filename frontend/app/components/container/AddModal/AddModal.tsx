@@ -5,9 +5,11 @@ import { useFetchItemsData } from "./AddModal.hooks";
 import { SearchResults } from "../SearchResults/SearchResults";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import InputAdornment from "@mui/material/InputAdornment";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import SearchIcon from "@mui/icons-material/Search";
 
 const boxStyle = {
   position: "absolute",
@@ -51,6 +53,13 @@ export const AddModal = (props: Props) => {
               placeholder="ほしいものリストに追加する商品を検索"
               fullWidth
               defaultValue=""
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
               onChange={(e) => setSearchText(e.target.value)}
             />
           </form>
