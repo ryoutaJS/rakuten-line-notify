@@ -7,6 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import AddIcon from "@mui/icons-material/Add";
 
 const itemNameStyle = {
   display: "-webkit-box",
@@ -31,7 +32,7 @@ export const SearchResults = ({ data }: { data: itemData }) => {
   };
 
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+    <Grid item xs={12} sm={6} md={4} lg={3}>
       <Card>
         <Link href={data.itemUrl} target="_blank">
           <CardMedia
@@ -51,7 +52,8 @@ export const SearchResults = ({ data }: { data: itemData }) => {
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>
           <Button variant="contained" sx={{ fontWeight: 550 }}>
-            ほしいものリストに追加
+            <AddIcon fontSize="small" />
+            リストに追加
           </Button>
         </CardActions>
       </Card>

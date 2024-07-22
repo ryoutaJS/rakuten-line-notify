@@ -16,7 +16,7 @@ const boxStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  bgcolor: "#f5f5f5",
+  bgcolor: "white",
   boxShadow: 24,
   p: 3,
   overflowY: "auto",
@@ -50,9 +50,10 @@ export const AddModal = (props: Props) => {
           </Typography>
           <form onSubmit={onSearch}>
             <TextField
-              placeholder="ほしいものリストに追加する商品を検索"
+              placeholder="商品名を入力（例：スマホ）"
               fullWidth
               defaultValue=""
+              sx={{ my: 1 }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
