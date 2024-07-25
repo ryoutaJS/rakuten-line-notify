@@ -1,6 +1,6 @@
 "use client";
 import { itemData } from "@/app/type/types";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useFetchItemsData } from "./AddModal.hooks";
 import { SearchResults } from "../SearchResults/SearchResults";
 import Box from "@mui/material/Box";
@@ -40,6 +40,13 @@ export const AddModal = (props: Props) => {
 
     setItemsData(result);
   };
+
+  useEffect(() => {
+    if (!props.open) {
+      setSearchText("");
+      setItemsData([]);
+    }
+  }, [props.open]);
 
   return (
     <>
