@@ -2,12 +2,14 @@ import json
 import logging
 
 from fetch_item_handler import fetch_item_handler
+from put_item_handler import put_item_handler
 from delete_item_handler import delete_item_handler
 
 
 def handler(event, context):
     handler_mapping = {
         "/api/fetch_item": fetch_item_handler,
+        "/api/put_item": put_item_handler,
         "/api/delete_item": delete_item_handler,
     }
     try:
