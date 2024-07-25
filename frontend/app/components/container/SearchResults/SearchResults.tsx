@@ -1,4 +1,5 @@
 import { itemData } from "@/app/type/types";
+import { usePutItem } from "./SearchResults.hooks";
 import Link from "next/link";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -20,9 +21,7 @@ const itemNameStyle = {
 };
 
 export const SearchResults = ({ data }: { data: itemData }) => {
-  const removeImageSizeParams = (url: string) => {
-    return url.split("?")[0];
-  };
+  const { putItemData, removeImageSizeParams } = usePutItem();
 
   const formatPrice = (price: number): string => {
     return new Intl.NumberFormat("ja-JP", {
@@ -51,7 +50,11 @@ export const SearchResults = ({ data }: { data: itemData }) => {
           </Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>
-          <Button variant="contained" sx={{ fontWeight: 550 }}>
+          <Button
+            variant="contained"
+            sx={{ fontWeight: 550 }}
+            onClick={() => putItemData(data)}
+          >
             <AddIcon fontSize="small" />
             リストに追加
           </Button>
