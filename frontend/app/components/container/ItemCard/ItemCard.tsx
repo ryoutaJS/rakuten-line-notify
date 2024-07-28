@@ -68,12 +68,12 @@ export const ItemCard = ({ data }: { data: itemData }) => {
 
   return (
     <>
-      <Grid item xs={12} sm={6} md={3} lg={2}>
+      <Grid item xs={6} sm={4} md={3} lg={2}>
         <Card sx={cardStyle}>
           <Link href={data.itemUrl} target="_blank">
             <CardMedia
               component="img"
-              height="250"
+              sx={{ height: { xs: 180, md: 250 } }}
               image={data.mediumImageUrls[0].imageUrl}
               style={{ objectFit: "contain" }}
             />
