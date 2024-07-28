@@ -95,7 +95,7 @@ export const ItemCard = ({ data }: { data: itemData }) => {
             sx={deleteButtonStyle}
             onClick={() => setDialogOpen(true)}
           >
-            <DeleteIcon />
+            <DeleteIcon color="primary" />
           </IconButton>
         </Card>
       </Grid>
