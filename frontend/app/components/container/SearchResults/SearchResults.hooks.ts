@@ -2,7 +2,7 @@ import { itemData } from "@/app/type/types";
 import { apiClient } from "@/app/utils/baseApi";
 import { useRouter } from "next/navigation";
 
-export const usePutItem = () => {
+export const usePutItem = (handleClose: () => void) => {
   const router = useRouter();
 
   /**
@@ -31,6 +31,7 @@ export const usePutItem = () => {
           imageUrl: removeImageSizeParams(data.mediumImageUrls[0].imageUrl),
         }),
       );
+      handleClose();
       router.refresh();
     } catch (e) {
       console.log(e);

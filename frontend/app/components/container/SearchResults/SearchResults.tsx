@@ -20,8 +20,13 @@ const itemNameStyle = {
   marginBottom: "3%",
 };
 
-export const SearchResults = ({ data }: { data: itemData }) => {
-  const { putItemData, removeImageSizeParams } = usePutItem();
+type Props = {
+  data: itemData;
+  handleClose: () => void;
+};
+
+export const SearchResults = (props: Props) => {
+  const { putItemData, removeImageSizeParams } = usePutItem(props.handleClose);
 
   const formatPrice = (price: number): string => {
     return new Intl.NumberFormat("ja-JP", {
@@ -33,27 +38,33 @@ export const SearchResults = ({ data }: { data: itemData }) => {
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
       <Card>
-        <Link href={data.itemUrl} target="_blank">
+        <Link href={props.data.itemUrl} target="_blank">
           <CardMedia
             component="img"
             height="200"
-            image={removeImageSizeParams(data.mediumImageUrls[0].imageUrl)}
+            image={removeImageSizeParams(
+              props.data.mediumImageUrls[0].imageUrl,
+            )}
             sx={{ objectFit: "contain" }}
           />
         </Link>
         <CardContent sx={{ paddingBottom: "2px" }}>
-          <Typography variant="body2" title={data.itemName} sx={itemNameStyle}>
-            {data.itemName}
+          <Typography
+            variant="body2"
+            title={props.data.itemName}
+            sx={itemNameStyle}
+          >
+            {props.data.itemName}
           </Typography>
           <Typography variant="body1" fontWeight="bold">
-            {formatPrice(data.itemPrice)}
+            {formatPrice(props.data.itemPrice)}
           </Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>
           <Button
             variant="contained"
             sx={{ fontWeight: 550 }}
-            onClick={() => putItemData(data)}
+            onClick={() => putItemData(props.data)}
           >
             <AddIcon fontSize="small" />
             リストに追加

@@ -73,7 +73,11 @@ export const AddModal = (props: Props) => {
           </form>
           <Grid container spacing={2}>
             {itemsData.map((data, index) => (
-              <SearchResults key={index} data={data} />
+              <SearchResults
+                key={index}
+                data={data}
+                handleClose={props.handleClose}
+              />
             ))}
           </Grid>
         </Box>
