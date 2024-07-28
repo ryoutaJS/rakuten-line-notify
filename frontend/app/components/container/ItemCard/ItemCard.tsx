@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { formatPrice } from "@/app/utils/format";
 import { useState } from "react";
 import { itemData } from "@/app/type/types";
 import { DeleteConfirmDialog } from "../DeleteConfirmDialog/DeleteConfirmDialog";
@@ -45,18 +46,6 @@ const deleteButtonStyle = {
   bottom: 0,
   right: 0,
   opacity: 0,
-};
-
-/**
- * 商品価格を「¥#,###」のフォーマットに変換する
- * @param price {number} - 商品価格
- * @return {string} フォーマット変換後の商品価格
- */
-const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat("ja-JP", {
-    style: "currency",
-    currency: "JPY",
-  }).format(price);
 };
 
 type Props = {
