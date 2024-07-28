@@ -37,7 +37,7 @@ const headerStyle = {
 
 interface Props {
   open: boolean;
-  handleClose(): void;
+  modalClose(): void;
 }
 
 export const AddModal = (props: Props) => {
@@ -61,10 +61,10 @@ export const AddModal = (props: Props) => {
 
   return (
     <>
-      <Modal open={props.open} onClose={props.handleClose}>
+      <Modal open={props.open} onClose={props.modalClose}>
         <Box sx={boxStyle}>
           <Box sx={headerStyle}>
-            <IconButton onClick={props.handleClose} sx={{ float: "right" }}>
+            <IconButton onClick={props.modalClose} sx={{ float: "right" }}>
               <CloseIcon />
             </IconButton>
             <Typography variant="h5" fontWeight={550}>
@@ -92,7 +92,7 @@ export const AddModal = (props: Props) => {
               <SearchResults
                 key={index}
                 data={data}
-                handleClose={props.handleClose}
+                modalClose={props.modalClose}
               />
             ))}
           </Grid>

@@ -22,11 +22,11 @@ const itemNameStyle = {
 
 type Props = {
   data: itemData;
-  handleClose: () => void;
+  modalClose: () => void;
 };
 
 export const SearchResults = (props: Props) => {
-  const { putItemData, removeImageSizeParams } = usePutItem(props.handleClose);
+  const { putItemData, removeImageSizeParams } = usePutItem(props.modalClose);
 
   const formatPrice = (price: number): string => {
     return new Intl.NumberFormat("ja-JP", {

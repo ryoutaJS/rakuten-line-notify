@@ -12,15 +12,15 @@ const buttonStyle = {
 
 export const AddButton = () => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const modalOpen = () => setOpen(true);
+  const modalClose = () => setOpen(false);
 
   return (
     <>
-      <Fab color="primary" sx={buttonStyle} onClick={handleOpen}>
+      <Fab color="primary" sx={buttonStyle} onClick={modalOpen}>
         <AddIcon />
       </Fab>
-      <AddModal open={open} handleClose={handleClose} />
+      <AddModal open={open} modalClose={modalClose} />
     </>
   );
 };
