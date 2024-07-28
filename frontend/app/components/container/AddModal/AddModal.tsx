@@ -5,11 +5,13 @@ import { useFetchItemsData } from "./AddModal.hooks";
 import { SearchResults } from "../SearchResults/SearchResults";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
 
 const boxStyle = {
   position: "absolute",
@@ -52,6 +54,9 @@ export const AddModal = (props: Props) => {
     <>
       <Modal open={props.open} onClose={props.handleClose}>
         <Box sx={boxStyle}>
+          <IconButton onClick={props.handleClose} sx={{ float: "right" }}>
+            <CloseIcon />
+          </IconButton>
           <Typography variant="h5" fontWeight={550}>
             ほしいものリストに追加
           </Typography>
