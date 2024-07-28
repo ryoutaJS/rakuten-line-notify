@@ -59,35 +59,36 @@ const formatPrice = (price: number): string => {
   }).format(price);
 };
 
-export const ItemCard = ({ data }: { data: itemData }) => {
-  const [dialogOpen, setDialogOpen] = useState(false);
+type Props = {
+  data: itemData;
+};
 
-  const handleClose = () => {
-    setDialogOpen(false);
-  };
+export const ItemCard = (props: Props) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const handleClose = () => setDialogOpen(false);
 
   return (
     <>
       <Grid item xs={6} sm={4} md={3} lg={2}>
         <Card sx={cardStyle}>
-          <Link href={data.itemUrl} target="_blank">
+          <Link href={props.data.itemUrl} target="_blank">
             <CardMedia
               component="img"
               sx={{ height: { xs: 180, md: 250 } }}
-              image={data.mediumImageUrls[0].imageUrl}
+              image={props.data.mediumImageUrls[0].imageUrl}
               style={{ objectFit: "contain" }}
             />
           </Link>
           <CardContent>
             <Typography
               variant="body2"
-              title={data.itemName}
+              title={props.data.itemName}
               sx={itemNameStyle}
             >
-              {data.itemName}
+              {props.data.itemName}
             </Typography>
             <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-              {formatPrice(data.itemPrice)}
+              {formatPrice(props.data.itemPrice)}
             </Typography>
           </CardContent>
           <IconButton
@@ -102,7 +103,7 @@ export const ItemCard = ({ data }: { data: itemData }) => {
       <DeleteConfirmDialog
         open={dialogOpen}
         handleClose={handleClose}
-        data={data}
+        data={props.data}
       />
     </>
   );
