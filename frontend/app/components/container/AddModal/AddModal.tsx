@@ -20,10 +20,19 @@ const boxStyle = {
   transform: "translate(-50%, -50%)",
   bgcolor: "white",
   boxShadow: 24,
-  p: 3,
+  px: 3,
+  pb: 3,
   overflowY: "auto",
   height: "80vh",
   width: { xs: "90%", sm: "80%", xl: "60%" },
+};
+
+const headerStyle = {
+  position: "sticky",
+  top: 0,
+  backgroundColor: "white",
+  zIndex: 1,
+  pt: 3,
 };
 
 interface Props {
@@ -54,28 +63,30 @@ export const AddModal = (props: Props) => {
     <>
       <Modal open={props.open} onClose={props.handleClose}>
         <Box sx={boxStyle}>
-          <IconButton onClick={props.handleClose} sx={{ float: "right" }}>
-            <CloseIcon />
-          </IconButton>
-          <Typography variant="h5" fontWeight={550}>
-            ほしいものリストに追加
-          </Typography>
-          <form onSubmit={onSearch}>
-            <TextField
-              placeholder="商品名を入力（例：スマホ）"
-              fullWidth
-              defaultValue=""
-              sx={{ my: 1 }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-              }}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-          </form>
+          <Box sx={headerStyle}>
+            <IconButton onClick={props.handleClose} sx={{ float: "right" }}>
+              <CloseIcon />
+            </IconButton>
+            <Typography variant="h5" fontWeight={550}>
+              ほしいものリストに追加
+            </Typography>
+            <form onSubmit={onSearch}>
+              <TextField
+                placeholder="商品名を入力（例：スマホ）"
+                fullWidth
+                defaultValue=""
+                sx={{ my: 1 }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+            </form>
+          </Box>
           <Grid container spacing={2}>
             {itemsData.map((data, index) => (
               <SearchResults
