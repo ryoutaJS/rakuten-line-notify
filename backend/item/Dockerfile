@@ -4,6 +4,7 @@ COPY item/requirements.txt ${LAMBDA_TASK_ROOT}/requirements.txt
 
 COPY item/main.py ${LAMBDA_TASK_ROOT}/main.py
 COPY item/fetch_item_handler.py ${LAMBDA_TASK_ROOT}/fetch_item_handler.py
+COPY item/put_item_handler.py ${LAMBDA_TASK_ROOT}/put_item_handler.py
 COPY item/delete_item_handler.py ${LAMBDA_TASK_ROOT}/delete_item_handler.py
 
 COPY db/table.py ${LAMBDA_TASK_ROOT}/db/table.py

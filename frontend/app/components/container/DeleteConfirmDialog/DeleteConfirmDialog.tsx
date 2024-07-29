@@ -41,7 +41,7 @@ export const DeleteConfirmDialog = (props: Props) => {
             component="img"
             sx={{ width: 120, height: "auto" }}
             alt={props.data.itemName}
-            src={props.data.imageUrl}
+            src={props.data.mediumImageUrls[0].imageUrl}
           />
           <DialogContentText sx={itemNameStyle}>
             {props.data.itemName}

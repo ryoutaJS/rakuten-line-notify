@@ -7,5 +7,5 @@ export type itemData = {
   itemName: string,
   itemPrice: number,
   itemUrl: string,
-  imageUrl: string,
-}
+  mediumImageUrls: { imageUrl: string }[],
+};

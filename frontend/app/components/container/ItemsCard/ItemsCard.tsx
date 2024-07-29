@@ -12,7 +12,7 @@ export const ItemsCard = async () => {
 
   return (
     <>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ marginBottom: 11 }}>
         <Title />
         <Grid container rowSpacing={2} columnSpacing={2}>
           {itemsData.map((data) => (
