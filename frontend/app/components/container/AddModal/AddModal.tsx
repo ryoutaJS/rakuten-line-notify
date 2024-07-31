@@ -18,7 +18,7 @@ const boxStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  bgcolor: "white",
+  bgcolor: "background.paper",
   boxShadow: 24,
   px: 3,
   pb: 3,
@@ -30,7 +30,7 @@ const boxStyle = {
 const headerStyle = {
   position: "sticky",
   top: 0,
-  backgroundColor: "white",
+  bgcolor: "background.paper",
   zIndex: 1,
   pt: 3,
 };
@@ -67,7 +67,7 @@ export const AddModal = (props: Props) => {
             <IconButton onClick={props.modalClose} sx={{ float: "right" }}>
               <CloseIcon />
             </IconButton>
-            <Typography variant="h5" fontWeight={550}>
+            <Typography variant="h5" fontFamily="monospace">
               ほしいものリストに追加
             </Typography>
             <form onSubmit={onSearch}>

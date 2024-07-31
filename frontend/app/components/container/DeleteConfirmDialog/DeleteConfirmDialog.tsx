@@ -33,7 +33,7 @@ export const DeleteConfirmDialog = (props: Props) => {
   return (
     <>
       <Dialog open={props.open} onClose={props.handleClose}>
-        <DialogTitle fontWeight={550}>
+        <DialogTitle fontFamily="monospace">
           こちらの商品を削除します。よろしいですか？
         </DialogTitle>
         <DialogContent dividers sx={{ display: "flex", gap: "3%" }}>
