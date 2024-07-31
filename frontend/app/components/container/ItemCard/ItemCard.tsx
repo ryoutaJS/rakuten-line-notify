@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { formatPrice } from "@/app/utils/format";
 import { useState } from "react";
 import { itemData } from "@/app/type/types";
 import { DeleteConfirmDialog } from "../DeleteConfirmDialog/DeleteConfirmDialog";
@@ -47,47 +48,36 @@ const deleteButtonStyle = {
   opacity: 0,
 };
 
-/**
- * 商品価格を「¥#,###」のフォーマットに変換する
- * @param price {number} - 商品価格
- * @return {string} フォーマット変換後の商品価格
- */
-const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat("ja-JP", {
-    style: "currency",
-    currency: "JPY",
-  }).format(price);
+type Props = {
+  data: itemData;
 };
 
-export const ItemCard = ({ data }: { data: itemData }) => {
+export const ItemCard = (props: Props) => {
   const [dialogOpen, setDialogOpen] = useState(false);
-
-  const handleClose = () => {
-    setDialogOpen(false);
-  };
+  const handleClose = () => setDialogOpen(false);
 
   return (
     <>
-      <Grid item xs={12} sm={6} md={3} lg={2}>
+      <Grid item xs={6} sm={4} md={3} lg={2}>
         <Card sx={cardStyle}>
-          <Link href={data.itemUrl} target="_blank">
+          <Link href={props.data.itemUrl} target="_blank">
             <CardMedia
               component="img"
-              height="250"
-              image={data.mediumImageUrls[0].imageUrl}
+              sx={{ height: { xs: 180, md: 250 } }}
+              image={props.data.mediumImageUrls[0].imageUrl}
               style={{ objectFit: "contain" }}
             />
           </Link>
           <CardContent>
             <Typography
               variant="body2"
-              title={data.itemName}
+              title={props.data.itemName}
               sx={itemNameStyle}
             >
-              {data.itemName}
+              {props.data.itemName}
             </Typography>
             <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-              {formatPrice(data.itemPrice)}
+              {formatPrice(props.data.itemPrice)}
             </Typography>
           </CardContent>
           <IconButton
@@ -95,14 +85,14 @@ export const ItemCard = ({ data }: { data: itemData }) => {
             sx={deleteButtonStyle}
             onClick={() => setDialogOpen(true)}
           >
-            <DeleteIcon />
+            <DeleteIcon color="primary" />
           </IconButton>
         </Card>
       </Grid>
       <DeleteConfirmDialog
         open={dialogOpen}
         handleClose={handleClose}
-        data={data}
+        data={props.data}
       />
     </>
   );

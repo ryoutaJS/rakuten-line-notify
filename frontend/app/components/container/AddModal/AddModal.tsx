@@ -18,7 +18,7 @@ const boxStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  bgcolor: "white",
+  bgcolor: "background.paper",
   boxShadow: 24,
   px: 3,
   pb: 3,
@@ -30,14 +30,14 @@ const boxStyle = {
 const headerStyle = {
   position: "sticky",
   top: 0,
-  backgroundColor: "white",
+  bgcolor: "background.paper",
   zIndex: 1,
   pt: 3,
 };
 
 interface Props {
   open: boolean;
-  handleClose(): void;
+  modalClose(): void;
 }
 
 export const AddModal = (props: Props) => {
@@ -61,13 +61,13 @@ export const AddModal = (props: Props) => {
 
   return (
     <>
-      <Modal open={props.open} onClose={props.handleClose}>
+      <Modal open={props.open} onClose={props.modalClose}>
         <Box sx={boxStyle}>
           <Box sx={headerStyle}>
-            <IconButton onClick={props.handleClose} sx={{ float: "right" }}>
+            <IconButton onClick={props.modalClose} sx={{ float: "right" }}>
               <CloseIcon />
             </IconButton>
-            <Typography variant="h5" fontWeight={550}>
+            <Typography variant="h5" fontFamily="monospace">
               ほしいものリストに追加
             </Typography>
             <form onSubmit={onSearch}>
@@ -76,6 +76,7 @@ export const AddModal = (props: Props) => {
                 fullWidth
                 defaultValue=""
                 sx={{ my: 1 }}
+                autoFocus
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -92,7 +93,7 @@ export const AddModal = (props: Props) => {
               <SearchResults
                 key={index}
                 data={data}
-                handleClose={props.handleClose}
+                modalClose={props.modalClose}
               />
             ))}
           </Grid>

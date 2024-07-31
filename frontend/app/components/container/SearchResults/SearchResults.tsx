@@ -1,3 +1,4 @@
+import { formatPrice } from "@/app/utils/format";
 import { itemData } from "@/app/type/types";
 import { usePutItem } from "./SearchResults.hooks";
 import Link from "next/link";
@@ -22,18 +23,11 @@ const itemNameStyle = {
 
 type Props = {
   data: itemData;
-  handleClose: () => void;
+  modalClose: () => void;
 };
 
 export const SearchResults = (props: Props) => {
-  const { putItemData, removeImageSizeParams } = usePutItem(props.handleClose);
-
-  const formatPrice = (price: number): string => {
-    return new Intl.NumberFormat("ja-JP", {
-      style: "currency",
-      currency: "JPY",
-    }).format(price);
-  };
+  const { putItemData, removeImageSizeParams } = usePutItem(props.modalClose);
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>

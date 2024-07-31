@@ -1,12 +1,11 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-
 import { Title } from "../../elements/Title/Title";
 import { ItemCard } from "../ItemCard/ItemCard";
-import { useFetchItemsData } from "./ItemsCard.hooks";
+import { useFetchItemsData } from "./WishList.hooks";
 import { itemData } from "@/app/type/types";
 
-export const ItemsCard = async () => {
+export const WishList = async () => {
   const { fetchItemsData } = useFetchItemsData();
   const itemsData: itemData[] = await fetchItemsData();
 
