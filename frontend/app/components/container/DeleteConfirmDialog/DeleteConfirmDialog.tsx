@@ -51,7 +51,7 @@ export const DeleteConfirmDialog = (props: Props) => {
           <Button variant="outlined" onClick={props.handleClose}>
             キャンセル
           </Button>
-          <Button variant="contained" onClick={deleteItem}>
+          <Button variant="contained" onClick={deleteItem} autoFocus>
             OK
           </Button>
         </DialogActions>

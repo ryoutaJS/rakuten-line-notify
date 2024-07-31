@@ -76,6 +76,7 @@ export const AddModal = (props: Props) => {
                 fullWidth
                 defaultValue=""
                 sx={{ my: 1 }}
+                autoFocus
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
