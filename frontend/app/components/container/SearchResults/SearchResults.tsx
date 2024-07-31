@@ -29,6 +29,14 @@ type Props = {
 export const SearchResults = (props: Props) => {
   const { putItemData, removeImageSizeParams } = usePutItem(props.modalClose);
 
+  // 商品画像が存在しない場合は「NO IMAGE」の画像を表示
+  let imageUrl: string | undefined = props.data.mediumImageUrls[0]?.imageUrl;
+  if (imageUrl) {
+    imageUrl = removeImageSizeParams(imageUrl);
+  } else {
+    imageUrl = "/images/no_image.png";
+  }
+
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
       <Card>
@@ -36,9 +44,7 @@ export const SearchResults = (props: Props) => {
           <CardMedia
             component="img"
             height="200"
-            image={removeImageSizeParams(
-              props.data.mediumImageUrls[0].imageUrl,
-            )}
+            image={imageUrl}
             sx={{ objectFit: "contain" }}
           />
         </Link>

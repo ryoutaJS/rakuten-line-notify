@@ -14,6 +14,28 @@ export const usePutItem = (modalClose: () => void) => {
   };
 
   /**
+   * 商品データ登録APIのリクエストボディを作成
+   * @param data 楽天の商品データ
+   */
+  const createRequestBody = (data: itemData) => {
+    const requestBody = {
+      itemCode: data.itemCode,
+      itemName: data.itemName,
+      itemPrice: data.itemPrice.toString(),
+      itemUrl: data.itemUrl,
+      imageUrl: "/images/no_image.png",
+    };
+
+    // 商品画像がある場合は画像URLを設定
+    const imageUrl = data.mediumImageUrls[0]?.imageUrl;
+    if (imageUrl) {
+      requestBody.imageUrl = removeImageSizeParams(imageUrl);
+    }
+
+    return JSON.stringify(requestBody);
+  };
+
+  /**
    * 商品データ登録APIを実行
    * @param data 楽天の商品データ
    */
@@ -23,13 +45,7 @@ export const usePutItem = (modalClose: () => void) => {
         "/api/put_item",
         "POST",
         "no-store",
-        JSON.stringify({
-          itemCode: data.itemCode,
-          itemName: data.itemName,
-          itemPrice: data.itemPrice.toString(),
-          itemUrl: data.itemUrl,
-          imageUrl: removeImageSizeParams(data.mediumImageUrls[0].imageUrl),
-        }),
+        createRequestBody(data),
       );
       modalClose();
       router.refresh();
