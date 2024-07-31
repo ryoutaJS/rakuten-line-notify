@@ -36,7 +36,7 @@ export const Header = () => {
         <Toolbar>
           <CenterBox>
             <NotifyIcon />
-            <HeaderTitle variant="h5">Rakuten Price Notify</HeaderTitle>
+            <HeaderTitle variant="h5">楽天価格通知アプリ</HeaderTitle>
           </CenterBox>
         </Toolbar>
       </AppBar>
