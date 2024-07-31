@@ -1,12 +1,12 @@
 import { AddButton } from "./components/container/AddButton/AddButton";
 import { Header } from "./components/elements/Header/Header";
-import { ItemsCard } from "./components/container/ItemsCard/ItemsCard";
+import { WishList } from "./components/container/WishList/WishList";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <ItemsCard />
+      <WishList />
       <AddButton />
     </>
   );
