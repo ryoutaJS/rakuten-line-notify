@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDeleteItem } from "./DeleteConfirmDialog.hooks";
 import { itemData } from "@/app/type/types";
 
@@ -8,6 +9,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 /**
  * 商品名のスタイル
@@ -29,6 +31,13 @@ interface Props {
 
 export const DeleteConfirmDialog = (props: Props) => {
   const { deleteItem } = useDeleteItem(props.data.itemCode);
+  const [loading, setLoading] = useState(false);
+
+  const clickOkButton = async () => {
+    setLoading(true);
+    await deleteItem();
+    setLoading(false);
+  };
 
   return (
     <>
@@ -51,9 +60,14 @@ export const DeleteConfirmDialog = (props: Props) => {
           <Button variant="outlined" onClick={props.handleClose}>
             キャンセル
           </Button>
-          <Button variant="contained" onClick={deleteItem} autoFocus>
+          <LoadingButton
+            loading={loading}
+            variant="contained"
+            onClick={clickOkButton}
+            autoFocus
+          >
             OK
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </Dialog>
     </>
