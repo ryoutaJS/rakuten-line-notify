@@ -1,14 +1,15 @@
+import { useState } from "react";
 import { formatPrice } from "@/app/utils/format";
 import { itemData } from "@/app/type/types";
 import { usePutItem } from "./SearchResults.hooks";
 import Link from "next/link";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import LoadingButton from "@mui/lab/LoadingButton";
 import AddIcon from "@mui/icons-material/Add";
 
 const itemNameStyle = {
@@ -28,6 +29,13 @@ type Props = {
 
 export const SearchResults = (props: Props) => {
   const { putItemData, removeImageSizeParams } = usePutItem(props.modalClose);
+  const [loading, setLoading] = useState(false);
+
+  const clickAddButton = async (data: itemData) => {
+    setLoading(true);
+    await putItemData(data);
+    setLoading(false);
+  };
 
   // 商品画像が存在しない場合は「NO IMAGE」の画像を表示
   let imageUrl: string | undefined = props.data.mediumImageUrls[0]?.imageUrl;
@@ -61,14 +69,15 @@ export const SearchResults = (props: Props) => {
           </Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>
-          <Button
+          <LoadingButton
+            loading={loading}
             variant="contained"
             sx={{ fontWeight: 550 }}
-            onClick={() => putItemData(props.data)}
+            onClick={() => clickAddButton(props.data)}
           >
             <AddIcon fontSize="small" />
             リストに追加
-          </Button>
+          </LoadingButton>
         </CardActions>
       </Card>
     </Grid>
