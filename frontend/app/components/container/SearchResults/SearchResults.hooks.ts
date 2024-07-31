@@ -47,8 +47,8 @@ export const usePutItem = (modalClose: () => void) => {
         "no-store",
         createRequestBody(data),
       );
-      modalClose();
       router.refresh();
+      modalClose();
     } catch (e) {
       console.log(e);
     }
