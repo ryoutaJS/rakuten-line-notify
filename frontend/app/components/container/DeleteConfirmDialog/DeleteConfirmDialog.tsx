@@ -45,6 +45,7 @@ export const DeleteConfirmDialog = (props: Props) => {
         <DialogTitle fontFamily="monospace">
           こちらの商品を削除します。よろしいですか？
         </DialogTitle>
+
         <DialogContent dividers sx={{ display: "flex", gap: "3%" }}>
           <Box
             component="img"
@@ -56,10 +57,12 @@ export const DeleteConfirmDialog = (props: Props) => {
             {props.data.itemName}
           </DialogContentText>
         </DialogContent>
+
         <DialogActions>
           <Button variant="outlined" onClick={props.handleClose}>
             キャンセル
           </Button>
+
           <LoadingButton
             loading={loading}
             variant="contained"

@@ -16,8 +16,8 @@ def handler(event, context) -> None:
             item_code=db_result["itemCode"]
         )
         
-        if rakuten_item_data["itemPrice"] < int(db_result["itemPrice"]):
-            discount: int = int(db_result["itemPrice"]) - rakuten_item_data["itemPrice"]
+        if rakuten_item_data["itemPrice"] < db_result["itemPrice"]:
+            discount: int = db_result["itemPrice"] - rakuten_item_data["itemPrice"]
             send_line_notify(
                 discount=discount,
                 item_url=rakuten_item_data["itemUrl"]

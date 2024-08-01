@@ -21,7 +21,7 @@ export const usePutItem = (modalClose: () => void) => {
     const requestBody = {
       itemCode: data.itemCode,
       itemName: data.itemName,
-      itemPrice: data.itemPrice.toString(),
+      itemPrice: data.itemPrice,
       itemUrl: data.itemUrl,
       imageUrl: "/images/no_image.png",
     };
