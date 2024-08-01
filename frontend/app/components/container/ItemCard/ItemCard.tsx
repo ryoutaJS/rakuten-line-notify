@@ -38,6 +38,15 @@ const cardStyle = {
 };
 
 /**
+ * 商品画像のスタイル
+ * @description 画像のアスペクト比と高さを設定
+ */
+const imageStyle = {
+  objectFit: "contain",
+  height: { xs: 180, md: 205 },
+};
+
+/**
  * 削除アイコンのスタイル
  * @description 商品カードの右下に表示
  */
@@ -63,9 +72,8 @@ export const ItemCard = (props: Props) => {
           <Link href={props.data.itemUrl} target="_blank">
             <CardMedia
               component="img"
-              sx={{ height: { xs: 180, md: 250 } }}
+              sx={imageStyle}
               image={props.data.mediumImageUrls[0].imageUrl}
-              style={{ objectFit: "contain" }}
             />
           </Link>
           <CardContent>
