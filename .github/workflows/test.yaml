@@ -1,0 +1,30 @@
+name: Run Test
+
+on: [push, pull_request]
+
+jobs:
+  frontend-test:
+    runs-on: ubuntu-latest
+
+    env:
+      WORKING_DIRECTORY: frontend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ${{ env.WORKING_DIRECTORY }}/package.json
+
+      - name: Install dependencies
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: npm install
+
+      - name: Run tests
+        working-directory: frontend
+        run: npm test
+
+  # backend-test:
+    # ここにbackendのテストを実行するジョブを追加する予定
