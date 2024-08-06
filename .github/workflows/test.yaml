@@ -26,5 +26,21 @@ jobs:
         working-directory: frontend
         run: npm test
 
-  # backend-test:
-    # ここにbackendのテストを実行するジョブを追加する予定
+  backend-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        working-directory: backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-mock
+      - name: Run tests
+        run: |
+          cd backend
+          python -m pytest tests/ -v
