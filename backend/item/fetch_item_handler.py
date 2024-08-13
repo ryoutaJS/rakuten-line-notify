@@ -3,15 +3,14 @@ from db.table import get_table
 
 
 def decimal_to_int(item_data):
-    """
-    Decimal型の場合はint型に変換して返す
-    item_data - DynamoDBから取得した商品データ
-    """
-    
     if type(item_data) == Decimal:
         return int(item_data)
     else:
         return item_data
+
+
+def sort_items_by_created_at(db_results: dict) -> dict:
+    return sorted(db_results, key=lambda data: data["createdAt"])
 
 
 def fetch_item_handler() -> dict:
@@ -29,7 +28,4 @@ def fetch_item_handler() -> dict:
         for key, value in db_result.items():
             db_result[key] = decimal_to_int(value)
 
-    # createdAtの昇順でソート
-    db_results = sorted(db_results, key=lambda data: data["createdAt"])
-
-    return { "items": db_results }
+    return {"items": sort_items_by_created_at(db_results)}
