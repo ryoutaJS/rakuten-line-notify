@@ -26,5 +26,18 @@ jobs:
         working-directory: frontend
         run: npm test
 
-  # backend-test:
-    # ここにbackendのテストを実行するジョブを追加する予定
+  backend-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: docker build -t python-app -f backend/tests/Dockerfile ./backend
+
+      - name: Run Pytest
+        run: docker run python-app
