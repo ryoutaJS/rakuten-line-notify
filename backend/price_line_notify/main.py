@@ -3,6 +3,15 @@ from fetch_rakuten_item import fetch_rakuten_item
 from send_line_notify import send_line_notify
 
 
+def send_line_notify_if_price_lower(rakuten_item_data, db_result) -> None:
+    if rakuten_item_data["itemPrice"] < db_result["itemPrice"]:
+        discount: int = db_result["itemPrice"] - rakuten_item_data["itemPrice"]
+        send_line_notify(
+            discount=discount,
+            item_url=rakuten_item_data["itemUrl"]
+        )
+    
+
 def handler(event, context) -> None:
     """
     楽天APIから取得した商品価格とDynamoDBに登録している楽天の商品価格を比較して、
@@ -15,10 +24,4 @@ def handler(event, context) -> None:
         rakuten_item_data: dict = fetch_rakuten_item(
             item_code=db_result["itemCode"]
         )
-        
-        if rakuten_item_data["itemPrice"] < db_result["itemPrice"]:
-            discount: int = db_result["itemPrice"] - rakuten_item_data["itemPrice"]
-            send_line_notify(
-                discount=discount,
-                item_url=rakuten_item_data["itemUrl"]
-            )
+        send_line_notify_if_price_lower(rakuten_item_data, db_result)
