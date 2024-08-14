@@ -1,4 +1,4 @@
-import { ApiUrl } from "../constants/url";
+import { ApiUrl } from '../constants/url'
 
 /**
  * apiを呼び出す共通関数
@@ -16,12 +16,12 @@ export const apiClient = async (
   const response = await fetch(ApiUrl.BASE_API_URL + urlSuffix, {
     method: method,
     headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     },
     cache: cache,
     body: body,
-  });
+  })
 
-  return response.json();
-};
+  return response.json()
+}

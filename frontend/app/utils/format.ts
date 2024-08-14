@@ -4,8 +4,8 @@
  * @return フォーマット変換後の商品価格
  */
 export const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat("ja-JP", {
-    style: "currency",
-    currency: "JPY",
-  }).format(price);
-};
+  return new Intl.NumberFormat('ja-JP', {
+    style: 'currency',
+    currency: 'JPY',
+  }).format(price)
+}

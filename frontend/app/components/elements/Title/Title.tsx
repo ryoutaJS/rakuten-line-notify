@@ -1,11 +1,11 @@
-import { Divider, IconButton, Tooltip, Typography } from "@mui/material";
-import InfoIcon from "@mui/icons-material/Info";
+import { Divider, IconButton, Tooltip, Typography } from '@mui/material'
+import InfoIcon from '@mui/icons-material/Info'
 
 export const Title = () => {
   return (
     <>
-      <div style={{ marginTop: "2%", marginBottom: "1%" }}>
-        <div style={{ display: "flex" }}>
+      <div style={{ marginTop: '2%', marginBottom: '1%' }}>
+        <div style={{ display: 'flex' }}>
           <Typography variant="h5" fontFamily="monospace">
             ほしいものリスト
           </Typography>
@@ -18,5 +18,5 @@ export const Title = () => {
         <Divider />
       </div>
     </>
-  );
-};
+  )
+}
