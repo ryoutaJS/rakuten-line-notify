@@ -15,21 +15,17 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 
 /* 商品名のスタイル */
-// 商品名の表示が折り返しで3行を超えた場合は3点リーダー（…）で省略して表示する
+// 商品名の表示が折り返しで2行を超えた場合は3点リーダー（…）で省略して表示する
 const itemNameStyle = {
   display: '-webkit-box',
   WebkitBoxOrient: 'vertical',
-  WebkitLineClamp: 3,
+  WebkitLineClamp: 2,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
-  height: 60,
+  height: 40,
   marginBottom: '2%',
 }
 
-/**
- * 商品カードのスタイル
- * @description マウスオーバーして0.4秒後に削除アイコンを表示
- */
 const cardStyle = {
   position: 'relative',
   '&:hover .delete-icon': {
@@ -38,19 +34,11 @@ const cardStyle = {
   },
 }
 
-/**
- * 商品画像のスタイル
- * @description 画像のアスペクト比と高さを設定
- */
 const imageStyle = {
   objectFit: 'contain',
   height: { xs: 180, md: 205 },
 }
 
-/**
- * 削除アイコンのスタイル
- * @description 商品カードの右下に表示
- */
 const deleteButtonStyle = {
   position: 'absolute',
   bottom: 0,
@@ -77,6 +65,7 @@ export const ItemCard = (props: Props) => {
               image={props.data.mediumImageUrls[0].imageUrl}
             />
           </Link>
+
           <CardContent>
             <Typography variant="body2" title={props.data.itemName} sx={itemNameStyle}>
               {props.data.itemName}
@@ -85,6 +74,7 @@ export const ItemCard = (props: Props) => {
               {formatPrice(props.data.itemPrice)}
             </Typography>
           </CardContent>
+
           <IconButton
             className="delete-icon"
             sx={deleteButtonStyle}
@@ -94,6 +84,7 @@ export const ItemCard = (props: Props) => {
           </IconButton>
         </Card>
       </Grid>
+
       <DeleteConfirmDialog open={dialogOpen} handleClose={handleClose} data={props.data} />
     </>
   )

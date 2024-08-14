@@ -15,10 +15,10 @@ import AddIcon from '@mui/icons-material/Add'
 const itemNameStyle = {
   display: '-webkit-box',
   WebkitBoxOrient: 'vertical',
-  WebkitLineClamp: 3,
+  WebkitLineClamp: 2,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
-  height: 60,
+  height: 38,
   marginBottom: '3%',
 }
 
@@ -51,6 +51,7 @@ export const SearchResults = (props: Props) => {
         <Link href={props.data.itemUrl} target="_blank">
           <CardMedia component="img" height="200" image={imageUrl} sx={{ objectFit: 'contain' }} />
         </Link>
+
         <CardContent sx={{ paddingBottom: '2px' }}>
           <Typography variant="body2" title={props.data.itemName} sx={itemNameStyle}>
             {props.data.itemName}
@@ -59,6 +60,7 @@ export const SearchResults = (props: Props) => {
             {formatPrice(props.data.itemPrice)}
           </Typography>
         </CardContent>
+
         <CardActions sx={{ justifyContent: 'center' }}>
           <LoadingButton
             loading={loading}
