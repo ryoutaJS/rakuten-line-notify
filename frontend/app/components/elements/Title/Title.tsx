@@ -11,7 +11,7 @@ export const Title = () => {
           </Typography>
           <Tooltip title="リストに表示されている商品の価格がセールなどで安くなったらLINE通知が届きます。">
             <IconButton>
-              <InfoIcon fontSize="small" />
+              <InfoIcon fontSize="small" color="primary" />
             </IconButton>
           </Tooltip>
         </div>
