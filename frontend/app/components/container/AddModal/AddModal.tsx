@@ -15,16 +15,13 @@ import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
 
 const boxStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  margin: '65px auto 0',
   bgcolor: 'background.paper',
   boxShadow: 24,
   px: 3,
   pb: 3,
   overflowY: 'auto',
-  height: '80vh',
+  maxHeight: '80vh',
   width: { xs: '90%', sm: '80%', xl: '60%' },
 }
 
@@ -68,9 +65,11 @@ export const AddModal = (props: Props) => {
             <IconButton onClick={props.modalClose} sx={{ float: 'right' }}>
               <CloseIcon />
             </IconButton>
+
             <Typography variant="h5" fontFamily="monospace">
               ほしいものリストに追加
             </Typography>
+
             <form onSubmit={onSearch}>
               <TextField
                 placeholder="商品名を入力（例：スマホ）"
@@ -89,6 +88,7 @@ export const AddModal = (props: Props) => {
               />
             </form>
           </Box>
+
           <Grid container spacing={2}>
             {itemsData.map((data, index) => (
               <SearchResults key={index} data={data} modalClose={props.modalClose} />
