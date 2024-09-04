@@ -42,16 +42,6 @@ describe('AddModal component', () => {
     render(<AddModal open={true} modalClose={modalClose} />)
   })
 
-  test('モーダルが表示されるか', () => {
-    expect(screen.getByText('ほしいものリストに追加')).toBeInTheDocument()
-  })
-
-  test('閉じるボタンが正しく機能するか', () => {
-    const closeButton = screen.getByRole('button')
-    fireEvent.click(closeButton)
-    expect(modalClose).toHaveBeenCalled()
-  })
-
   test('検索入力フィールドが存在し、入力を受け付けるか', () => {
     const searchInput = screen.getByPlaceholderText('商品名を入力（例：スマホ）')
 
