@@ -1,36 +1,25 @@
 'use client'
-
 import { itemData } from '@/app/type/types'
-import { FormEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useFetchItemsData } from './AddModal.hooks'
+import { SearchBar } from '../SearchBar/SearchBar'
 import { SearchResults } from '../SearchResults/SearchResults'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import IconButton from '@mui/material/IconButton'
-import InputAdornment from '@mui/material/InputAdornment'
-import Modal from '@mui/material/Modal'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-import SearchIcon from '@mui/icons-material/Search'
-import CloseIcon from '@mui/icons-material/Close'
+import { Box, Grid, Modal } from '@mui/material'
 
 const boxStyle = {
-  margin: '65px auto 0',
+  margin: '50px auto 0',
   bgcolor: 'background.paper',
+  borderRadius: '5px',
   boxShadow: 24,
+  pt: 3,
   px: 3,
-  pb: 3,
-  overflowY: 'auto',
-  maxHeight: '80vh',
   width: { xs: '90%', sm: '80%', xl: '60%' },
 }
 
-const headerStyle = {
-  position: 'sticky',
-  top: 0,
-  bgcolor: 'background.paper',
-  zIndex: 1,
-  pt: 3,
+const searchResultsStyle = {
+  overflowY: 'auto',
+  maxHeight: '75vh',
+  pb: 3,
 }
 
 interface Props {
@@ -39,20 +28,16 @@ interface Props {
 }
 
 export const AddModal = (props: Props) => {
-  const [searchText, setSearchText] = useState('')
   const [itemsData, setItemsData] = useState<itemData[]>([])
   const { fetchItemsData } = useFetchItemsData()
 
-  const onSearch = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  const onSearch = async (searchText: string) => {
     const result: itemData[] = await fetchItemsData(searchText)
-
     setItemsData(result)
   }
 
   useEffect(() => {
     if (!props.open) {
-      setSearchText('')
       setItemsData([])
     }
   }, [props.open])
@@ -61,39 +46,15 @@ export const AddModal = (props: Props) => {
     <>
       <Modal open={props.open} onClose={props.modalClose}>
         <Box sx={boxStyle}>
-          <Box sx={headerStyle}>
-            <IconButton onClick={props.modalClose} sx={{ float: 'right' }}>
-              <CloseIcon />
-            </IconButton>
+          <SearchBar onSearch={onSearch} />
 
-            <Typography variant="h5" fontFamily="monospace">
-              ほしいものリストに追加
-            </Typography>
-
-            <form onSubmit={onSearch}>
-              <TextField
-                placeholder="商品名を入力（例：スマホ）"
-                fullWidth
-                defaultValue=""
-                sx={{ my: 1 }}
-                autoFocus
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                }}
-                onChange={e => setSearchText(e.target.value)}
-              />
-            </form>
+          <Box sx={searchResultsStyle}>
+            <Grid container spacing={2}>
+              {itemsData.map((data, index) => (
+                <SearchResults key={index} data={data} modalClose={props.modalClose} />
+              ))}
+            </Grid>
           </Box>
-
-          <Grid container spacing={2}>
-            {itemsData.map((data, index) => (
-              <SearchResults key={index} data={data} modalClose={props.modalClose} />
-            ))}
-          </Grid>
         </Box>
       </Modal>
     </>
