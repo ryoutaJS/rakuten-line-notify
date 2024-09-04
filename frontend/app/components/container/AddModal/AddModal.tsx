@@ -9,7 +9,6 @@ import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import Modal from '@mui/material/Modal'
-import Typography from '@mui/material/Typography'
 import CloseIcon from '@mui/icons-material/Close'
 
 const boxStyle = {
@@ -59,10 +58,6 @@ export const AddModal = (props: Props) => {
             <IconButton onClick={props.modalClose} sx={{ float: 'right' }}>
               <CloseIcon />
             </IconButton>
-
-            <Typography variant="h5" fontFamily="monospace">
-              ほしいものリストに追加
-            </Typography>
 
             <SearchBar onSearch={onSearch} />
           </Box>
