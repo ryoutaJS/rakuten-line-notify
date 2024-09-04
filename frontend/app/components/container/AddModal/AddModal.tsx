@@ -1,17 +1,15 @@
 'use client'
 
 import { itemData } from '@/app/type/types'
-import { FormEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useFetchItemsData } from './AddModal.hooks'
+import { SearchBar } from '../SearchBar/SearchBar'
 import { SearchResults } from '../SearchResults/SearchResults'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
-import InputAdornment from '@mui/material/InputAdornment'
 import Modal from '@mui/material/Modal'
-import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
 
 const boxStyle = {
@@ -39,20 +37,16 @@ interface Props {
 }
 
 export const AddModal = (props: Props) => {
-  const [searchText, setSearchText] = useState('')
   const [itemsData, setItemsData] = useState<itemData[]>([])
   const { fetchItemsData } = useFetchItemsData()
 
-  const onSearch = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  const onSearch = async (searchText: string) => {
     const result: itemData[] = await fetchItemsData(searchText)
-
     setItemsData(result)
   }
 
   useEffect(() => {
     if (!props.open) {
-      setSearchText('')
       setItemsData([])
     }
   }, [props.open])
@@ -70,23 +64,7 @@ export const AddModal = (props: Props) => {
               ほしいものリストに追加
             </Typography>
 
-            <form onSubmit={onSearch}>
-              <TextField
-                placeholder="商品名を入力（例：スマホ）"
-                fullWidth
-                defaultValue=""
-                sx={{ my: 1 }}
-                autoFocus
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                }}
-                onChange={e => setSearchText(e.target.value)}
-              />
-            </form>
+            <SearchBar onSearch={onSearch} />
           </Box>
 
           <Grid container spacing={2}>
