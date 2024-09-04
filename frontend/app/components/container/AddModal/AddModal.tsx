@@ -12,22 +12,19 @@ import Modal from '@mui/material/Modal'
 import CloseIcon from '@mui/icons-material/Close'
 
 const boxStyle = {
-  margin: '65px auto 0',
+  margin: '50px auto 0',
   bgcolor: 'background.paper',
+  borderRadius: '5px',
   boxShadow: 24,
+  pt: 3,
   px: 3,
-  pb: 3,
-  overflowY: 'auto',
-  maxHeight: '80vh',
   width: { xs: '90%', sm: '80%', xl: '60%' },
 }
 
-const headerStyle = {
-  position: 'sticky',
-  top: 0,
-  bgcolor: 'background.paper',
-  zIndex: 1,
-  pt: 3,
+const searchResultsStyle = {
+  overflowY: 'auto',
+  maxHeight: '75vh',
+  pb: 3,
 }
 
 interface Props {
@@ -54,19 +51,19 @@ export const AddModal = (props: Props) => {
     <>
       <Modal open={props.open} onClose={props.modalClose}>
         <Box sx={boxStyle}>
-          <Box sx={headerStyle}>
-            <IconButton onClick={props.modalClose} sx={{ float: 'right' }}>
-              <CloseIcon />
-            </IconButton>
+          <IconButton onClick={props.modalClose} sx={{ float: 'right' }}>
+            <CloseIcon />
+          </IconButton>
 
-            <SearchBar onSearch={onSearch} />
+          <SearchBar onSearch={onSearch} />
+
+          <Box sx={searchResultsStyle}>
+            <Grid container spacing={2}>
+              {itemsData.map((data, index) => (
+                <SearchResults key={index} data={data} modalClose={props.modalClose} />
+              ))}
+            </Grid>
           </Box>
-
-          <Grid container spacing={2}>
-            {itemsData.map((data, index) => (
-              <SearchResults key={index} data={data} modalClose={props.modalClose} />
-            ))}
-          </Grid>
         </Box>
       </Modal>
     </>
