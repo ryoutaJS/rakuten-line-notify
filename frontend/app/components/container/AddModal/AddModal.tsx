@@ -1,15 +1,10 @@
 'use client'
-
 import { itemData } from '@/app/type/types'
 import { useEffect, useState } from 'react'
 import { useFetchItemsData } from './AddModal.hooks'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { SearchResults } from '../SearchResults/SearchResults'
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import IconButton from '@mui/material/IconButton'
-import Modal from '@mui/material/Modal'
-import CloseIcon from '@mui/icons-material/Close'
+import { Box, Grid, Modal } from '@mui/material'
 
 const boxStyle = {
   margin: '50px auto 0',
@@ -51,10 +46,6 @@ export const AddModal = (props: Props) => {
     <>
       <Modal open={props.open} onClose={props.modalClose}>
         <Box sx={boxStyle}>
-          <IconButton onClick={props.modalClose} sx={{ float: 'right' }}>
-            <CloseIcon />
-          </IconButton>
-
           <SearchBar onSearch={onSearch} />
 
           <Box sx={searchResultsStyle}>
